@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Net6JwtApp.Back.Core.Application.Interfaces;
 using Net6JwtApp.Back.Persistance.Context;
+using Net6JwtApp.Back.Persistance.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ builder.Services.AddDbContext<UdemyJwtContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("Local"));
 });
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 

@@ -1,38 +1,48 @@
 ﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using Net6JwtApp.Back.Core.Application.Interfaces;
+using Net6JwtApp.Back.Persistance.Context;
 
 namespace Net6JwtApp.Back.Persistance.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, new()
     {
-        public Task<List<T>> GetAllAsync()
+        private readonly UdemyJwtContext _context;
+        public Repository(UdemyJwtContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task<List<T>> GetAllAsync()
+        {
+            return await _context.Set<T>().AsNoTracking().ToListAsync();
         }
 
-        public Task<T> GetByIdAsync(object id)
+        public async Task<T?> GetByIdAsync(object id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FindAsync(id);
         }
 
-        public Task<T> GetByFilterAsync(Expression<Func<T, bool>> filter)
+        public async Task<T?> GetByFilterAsync(Expression<Func<T, bool>> filter)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().AsNoTracking().SingleOrDefaultAsync(filter);
         }
 
-        public Task CreateAsync(T entity)
+        public async Task CreateAsync(T entity)
         {
-            throw new NotImplementedException();
+            await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Update(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task RemoveAsync(T entity)
+        public async Task RemoveAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Remove(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }
