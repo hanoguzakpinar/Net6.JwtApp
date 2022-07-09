@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Net6JwtApp.Back.Migrations
+namespace Net6JwtApp.Back.Persistance.Migrations
 {
     public partial class InitialCreate : Migration
     {

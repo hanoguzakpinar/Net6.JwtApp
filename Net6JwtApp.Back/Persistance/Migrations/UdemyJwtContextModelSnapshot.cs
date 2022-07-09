@@ -7,7 +7,7 @@ using Net6JwtApp.Back.Persistance.Context;
 
 #nullable disable
 
-namespace Net6JwtApp.Back.Migrations
+namespace Net6JwtApp.Back.Persistance.Migrations
 {
     [DbContext(typeof(UdemyJwtContext))]
     partial class UdemyJwtContextModelSnapshot : ModelSnapshot

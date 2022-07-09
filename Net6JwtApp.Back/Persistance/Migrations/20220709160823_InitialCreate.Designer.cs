@@ -8,10 +8,10 @@ using Net6JwtApp.Back.Persistance.Context;
 
 #nullable disable
 
-namespace Net6JwtApp.Back.Migrations
+namespace Net6JwtApp.Back.Persistance.Migrations
 {
     [DbContext(typeof(UdemyJwtContext))]
-    [Migration("20220709155056_InitialCreate")]
+    [Migration("20220709160823_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
