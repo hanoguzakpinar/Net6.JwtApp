@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Net6JwtApp.Back.Persistance.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<UdemyJwtContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("Local"));
+});
 
 var app = builder.Build();
 
