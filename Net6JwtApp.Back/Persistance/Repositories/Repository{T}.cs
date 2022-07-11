@@ -1,7 +1,7 @@
-﻿using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Net6JwtApp.Back.Core.Application.Interfaces;
 using Net6JwtApp.Back.Persistance.Context;
+using System.Linq.Expressions;
 
 namespace Net6JwtApp.Back.Persistance.Repositories
 {

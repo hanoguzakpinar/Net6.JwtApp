@@ -1,5 +1,9 @@
+using System.Reflection;
+using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Net6JwtApp.Back.Core.Application.Interfaces;
+using Net6JwtApp.Back.Core.Application.Mappings;
 using Net6JwtApp.Back.Persistance.Context;
 using Net6JwtApp.Back.Persistance.Repositories;
 
@@ -16,6 +20,14 @@ builder.Services.AddDbContext<UdemyJwtContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("Local"));
 });
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddAutoMapper(opt =>
+{
+    opt.AddProfiles(new List<Profile>()
+    {
+        new ProductProfile()
+    });
+});
 
 var app = builder.Build();
 
