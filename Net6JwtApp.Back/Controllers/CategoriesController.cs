@@ -37,5 +37,12 @@ namespace Net6JwtApp.Back.Controllers
             await _mediator.Send(request);
             return Created("", request);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _mediator.Send(new DeleteCategoryCommandRequest(id));
+            return NoContent();
+        }
     }
 }
