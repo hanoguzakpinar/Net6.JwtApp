@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Commands;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Queries;
@@ -42,6 +41,13 @@ namespace Net6JwtApp.Back.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _mediator.Send(new DeleteCategoryCommandRequest(id));
+            return NoContent();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateCategoryCommandRequest request)
+        {
+            await _mediator.Send(request);
             return NoContent();
         }
     }

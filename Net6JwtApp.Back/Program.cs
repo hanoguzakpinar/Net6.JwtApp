@@ -1,4 +1,3 @@
-using System.Reflection;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +5,7 @@ using Net6JwtApp.Back.Core.Application.Interfaces;
 using Net6JwtApp.Back.Core.Application.Mappings;
 using Net6JwtApp.Back.Persistance.Context;
 using Net6JwtApp.Back.Persistance.Repositories;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
