@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Net6JwtApp.Back.Core.Application.Features.CQRS.Commands;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Queries;
 
 namespace Net6JwtApp.Back.Controllers
@@ -28,6 +29,13 @@ namespace Net6JwtApp.Back.Controllers
         {
             var category = await _mediator.Send(new GetCategoryQueryRequest(id));
             return category == null ? NotFound() : Ok(category);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateCategoryCommandRequest request)
+        {
+            await _mediator.Send(request);
+            return Created("", request);
         }
     }
 }
