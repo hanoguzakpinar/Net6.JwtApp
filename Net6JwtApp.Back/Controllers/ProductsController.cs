@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Net6JwtApp.Back.Core.Application.Features.CQRS.Commands;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Queries;
 
 namespace Net6JwtApp.Back.Controllers
@@ -28,6 +29,13 @@ namespace Net6JwtApp.Back.Controllers
         {
             var result = await _mediator.Send(new GetProductQueryRequest(id));
             return result == null ? NotFound() : Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteProductCommandRequest(id));
+            return NoContent();
         }
     }
 }
