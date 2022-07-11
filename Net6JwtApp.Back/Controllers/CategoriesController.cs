@@ -22,5 +22,12 @@ namespace Net6JwtApp.Back.Controllers
             var categories = await _mediator.Send(new GetAllCategoriesQueryRequest());
             return Ok(categories);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var category = await _mediator.Send(new GetCategoryQueryRequest(id));
+            return category == null ? NotFound() : Ok(category);
+        }
     }
 }
