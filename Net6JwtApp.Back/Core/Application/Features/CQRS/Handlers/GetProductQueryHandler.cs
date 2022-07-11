@@ -7,21 +7,16 @@ using Net6JwtApp.Back.Core.Domain;
 
 namespace Net6JwtApp.Back.Core.Application.Features.CQRS.Handlers
 {
-    public class GetProductQueryHandler : IRequestHandler<GetProductQueryRequest, ProductListDto>
+    public class GetProductQueryHandler : BaseHandler<Product>, IRequestHandler<GetProductQueryRequest, ProductListDto>
     {
-        private readonly IRepository<Product> _repository;
-        private readonly IMapper _mapper;
-
-        public GetProductQueryHandler(IRepository<Product> repository, IMapper mapper)
+        public GetProductQueryHandler(IRepository<Product> repository, IMapper mapper) : base(repository, mapper)
         {
-            _repository = repository;
-            _mapper = mapper;
         }
 
         public async Task<ProductListDto> Handle(GetProductQueryRequest request, CancellationToken cancellationToken)
         {
-            var data = await _repository.GetByFilterAsync(x => x.Id == request.Id);
-            return _mapper.Map<ProductListDto>(data);
+            var data = await Repository.GetByFilterAsync(x => x.Id == request.Id);
+            return Mapper.Map<ProductListDto>(data);
         }
     }
 }

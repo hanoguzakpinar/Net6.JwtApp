@@ -1,22 +1,19 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Commands;
 using Net6JwtApp.Back.Core.Application.Interfaces;
 using Net6JwtApp.Back.Core.Domain;
 
 namespace Net6JwtApp.Back.Core.Application.Features.CQRS.Handlers
 {
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest>
+    public class CreateProductCommandHandler : BaseHandler<Product>, IRequestHandler<CreateProductCommandRequest>
     {
-        private readonly IRepository<Product> _repository;
-
-        public CreateProductCommandHandler(IRepository<Product> repository)
+        public CreateProductCommandHandler(IRepository<Product> repository, IMapper mapper) : base(repository, mapper)
         {
-            _repository = repository;
         }
-
         public async Task<Unit> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
-            await _repository.CreateAsync(new Product()
+            await Repository.CreateAsync(new Product()
             {
                 CategoryId = request.CategoryId,
                 Name = request.Name,
