@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Commands;
@@ -9,6 +10,7 @@ namespace Net6JwtApp.Back.Controllers
     [EnableCors]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class CategoriesController : ControllerBase
     {
         private readonly IMediator _mediator;
