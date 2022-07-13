@@ -33,6 +33,15 @@ builder.Services.AddAutoMapper(opt =>
         new CategoryProfile()
     });
 });
+
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("GlobalCors", config =>
+    {
+        config.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
     opt.RequireHttpsMetadata = false;
@@ -56,6 +65,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("GlobalCors");
 app.UseAuthentication();
 app.UseAuthorization();
 

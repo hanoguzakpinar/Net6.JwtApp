@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Commands;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Queries;
@@ -6,6 +7,7 @@ using Net6JwtApp.Back.Infrastructure.Tools;
 
 namespace Net6JwtApp.Back.Controllers
 {
+    [EnableCors]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase

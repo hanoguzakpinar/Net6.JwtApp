@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Commands;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Queries;
 
 namespace Net6JwtApp.Back.Controllers
 {
+    [EnableCors]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
