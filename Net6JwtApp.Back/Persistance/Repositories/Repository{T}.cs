@@ -7,8 +7,8 @@ namespace Net6JwtApp.Back.Persistance.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, new()
     {
-        private readonly UdemyJwtContext _context;
-        public Repository(UdemyJwtContext context)
+        private readonly Net6JwtContext _context;
+        public Repository(Net6JwtContext context)
         {
             _context = context;
         }

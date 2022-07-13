@@ -9,7 +9,7 @@ using Net6JwtApp.Back.Persistance.Context;
 
 namespace Net6JwtApp.Back.Persistance.Migrations
 {
-    [DbContext(typeof(UdemyJwtContext))]
+    [DbContext(typeof(Net6JwtContext))]
     partial class UdemyJwtContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

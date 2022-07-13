@@ -14,4 +14,18 @@ namespace Net6JwtApp.Back.Core.Domain
             Mapper = mapper;
         }
     }
+
+    public abstract class BaseHandler<T, TX> where T : class, new() where TX : class, new()
+    {
+        public readonly IRepository<T> TRepository;
+        public readonly IRepository<TX> TXRepository;
+        public readonly IMapper Mapper;
+
+        protected BaseHandler(IRepository<T> repository, IRepository<TX> txRepository, IMapper mapper)
+        {
+            TRepository = repository;
+            TXRepository = txRepository;
+            Mapper = mapper;
+        }
+    }
 }

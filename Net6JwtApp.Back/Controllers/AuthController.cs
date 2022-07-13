@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Commands;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Queries;
+using Net6JwtApp.Back.Infrastructure;
 using Net6JwtApp.Back.Infrastructure.Tools;
 
 namespace Net6JwtApp.Back.Controllers
@@ -36,7 +37,7 @@ namespace Net6JwtApp.Back.Controllers
                 return Created("", token);
             }
 
-            return BadRequest("Username veya password hatalı.");
+            return BadRequest(MessageContent.IncorrectSignIn);
         }
     }
 }

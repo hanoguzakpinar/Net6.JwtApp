@@ -4,11 +4,10 @@ using Net6JwtApp.Back.Persistance.Configs;
 
 namespace Net6JwtApp.Back.Persistance.Context
 {
-    public class UdemyJwtContext : DbContext
+    public class Net6JwtContext : DbContext
     {
-        public UdemyJwtContext(DbContextOptions<UdemyJwtContext> options) : base(options)
+        public Net6JwtContext(DbContextOptions<Net6JwtContext> options) : base(options)
         {
-
         }
         public DbSet<Product> Products => this.Set<Product>();
         public DbSet<Category> Categories => this.Set<Category>();

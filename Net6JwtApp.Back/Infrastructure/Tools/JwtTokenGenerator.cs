@@ -1,9 +1,8 @@
-﻿using Net6JwtApp.Back.Core.Domain;
+﻿using Microsoft.IdentityModel.Tokens;
+using Net6JwtApp.Back.Core.Application.Dtos;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using Net6JwtApp.Back.Core.Application.Dtos;
 
 namespace Net6JwtApp.Back.Infrastructure.Tools
 {

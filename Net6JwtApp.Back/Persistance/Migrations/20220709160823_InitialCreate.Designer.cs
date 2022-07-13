@@ -10,7 +10,7 @@ using Net6JwtApp.Back.Persistance.Context;
 
 namespace Net6JwtApp.Back.Persistance.Migrations
 {
-    [DbContext(typeof(UdemyJwtContext))]
+    [DbContext(typeof(Net6JwtContext))]
     [Migration("20220709160823_InitialCreate")]
     partial class InitialCreate
     {
