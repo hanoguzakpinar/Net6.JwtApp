@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Commands;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Queries;
+using Net6JwtApp.Back.Infrastructure.Tools;
 
 namespace Net6JwtApp.Back.Controllers
 {
@@ -30,7 +30,8 @@ namespace Net6JwtApp.Back.Controllers
             var userDto = await _mediator.Send(request);
             if (userDto.IsExist)
             {
-                return Created("", request);
+                var token = JwtTokenGenerator.GenerateToken(userDto);
+                return Created("", token);
             }
 
             return BadRequest("Username veya password hatalı.");

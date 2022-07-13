@@ -1,14 +1,15 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Net6JwtApp.Back.Core.Application.Interfaces;
 using Net6JwtApp.Back.Core.Application.Mappings;
+using Net6JwtApp.Back.Infrastructure.Tools;
 using Net6JwtApp.Back.Persistance.Context;
 using Net6JwtApp.Back.Persistance.Repositories;
 using System.Reflection;
 using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,11 +38,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     opt.RequireHttpsMetadata = false;
     opt.TokenValidationParameters = new TokenValidationParameters()
     {
-        ValidAudience = "http://localhost",
-        ValidIssuer = "http://localhost",
+        ValidAudience = JwtTokenSettings.Audience,
+        ValidIssuer = JwtTokenSettings.Issuer,
         ClockSkew = TimeSpan.Zero,
         ValidateLifetime = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("oðuzoðuzoðuzoðuz1.")),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenSettings.Key)),
         ValidateIssuerSigningKey = true
     };
 });
