@@ -6,6 +6,9 @@ using Net6JwtApp.Back.Core.Application.Mappings;
 using Net6JwtApp.Back.Persistance.Context;
 using Net6JwtApp.Back.Persistance.Repositories;
 using System.Reflection;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +32,19 @@ builder.Services.AddAutoMapper(opt =>
         new CategoryProfile()
     });
 });
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.RequireHttpsMetadata = false;
+    opt.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidAudience = "http://localhost",
+        ValidIssuer = "http://localhost",
+        ClockSkew = TimeSpan.Zero,
+        ValidateLifetime = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("oðuzoðuzoðuzoðuz1.")),
+        ValidateIssuerSigningKey = true
+    };
+});
 
 var app = builder.Build();
 
@@ -39,6 +55,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
