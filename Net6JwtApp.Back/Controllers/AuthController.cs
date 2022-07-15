@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System.Security.Claims;
+using MediatR;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Net6JwtApp.Back.Core.Application.Features.CQRS.Commands;
@@ -38,6 +39,17 @@ namespace Net6JwtApp.Back.Controllers
             }
 
             return BadRequest(MessageContent.IncorrectSignIn);
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult WhoAmI()
+        {
+            string? userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            string? role = User.FindFirst(ClaimTypes.Role)?.Value;
+            string? name = User.FindFirst(ClaimTypes.Name)?.Value;
+
+            var user = new { Name = name, Role = role, UserId = userId };
+            return Ok(user);
         }
     }
 }
